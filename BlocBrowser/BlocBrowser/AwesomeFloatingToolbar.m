@@ -9,6 +9,7 @@
 
 #import "AwesomeFloatingToolbar.h"
 
+
 @interface AwesomeFloatingToolbar ()
 
 @property (nonatomic, strong) NSArray *currentTitles;
@@ -17,6 +18,8 @@
 @property (nonatomic, weak) UILabel *currentLabel;
 
 @end
+
+@implementation AwesomeFloatingToolbar
 
 - (instancetype) initWithFourTitles:(NSArray *)titles {
     // First, call the superclass (UIView)'s initializer, to make sure we do all that setup first.
@@ -60,17 +63,18 @@
     }
     
     return self;
-
+}
+    
 - (void) layoutSubviews {
     // set the frames for the 4 labels
     
     for (UILabel *thisLabel in self.labels) {
         NSUInteger currentLabelIndex = [self.labels indexOfObject:thisLabel];
         
-        CGFloat labelHeight = CGRectGetHeight(self.bounds) / 2;
-        CGFloat labelWidth = CGRectGetWidth(self.bounds) / 2;
+        CGFloat labelHeight = CGRectGetHeight(self.bounds)/2;
+        CGFloat labelWidth = CGRectGetWidth(self.bounds)/4;
         CGFloat labelX = 0;
-        CGFloat labelY = 0;
+        CGFloat labelY = 2;
         
         // adjust labelX and labelY for each label
         if (currentLabelIndex < 2) {
@@ -78,20 +82,21 @@
             labelY = 0;
         } else {
             // 2 or 3, so on bottom
-            labelY = CGRectGetHeight(self.bounds) / 2;
+            labelY = CGRectGetHeight(self.bounds)/2;
         }
         
         if (currentLabelIndex % 2 == 0) { // is currentLabelIndex evenly divisible by 2?
             // 0 or 2, so on the left
-            labelX = 0;
+            labelX = 2;
         } else {
             // 1 or 3, so on the right
-            labelX = CGRectGetWidth(self.bounds) / 2;
+            labelX = CGRectGetWidth(self.bounds);
         }
         
         thisLabel.frame = CGRectMake(labelX, labelY, labelWidth, labelHeight);
     }
-    
+}
+
 #pragma mark - Touch Handling
     
     - (UILabel *) labelFromTouches:(NSSet *)touches withEvent:(UIEvent *)event {
@@ -156,3 +161,6 @@
             label.alpha = enabled ? 1.0 : 0.25;
         }
     }
+    
+    @end
+
