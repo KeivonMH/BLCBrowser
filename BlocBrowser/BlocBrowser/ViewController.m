@@ -73,6 +73,8 @@
     [alert addAction:okAction];
     
     [self presentViewController:alert animated:YES completion:nil];
+    
+    self.awesomeToolbar.frame = CGRectMake(20, 100, 280, 60);
 }
 
 
@@ -88,10 +90,8 @@
     // Now, assign the frames
     self.textField.frame = CGRectMake(0, 0, width, itemHeight);
     self.webView.frame = CGRectMake(0, CGRectGetMaxY(self.textField.frame), width, browserHeight);
-
     
-    self.awesomeToolbar.frame = CGRectMake(20, 100, 280, 60);
-
+    
 }
 
 #pragma mark - AwesomeFloatingToolbarDelegate
@@ -171,6 +171,28 @@
     
     [self updateButtonsAndTitle];
 }
+#pragma mark - Pan & Pinch
+
+- (void) floatingToolbar:(AwesomeFloatingToolbar *)toolbar didTryToPanWithOffset:(CGPoint)offset {
+    CGPoint startingPoint = toolbar.frame.origin;
+    CGPoint newPoint = CGPointMake(startingPoint.x + offset.x, startingPoint.y + offset.y);
+    
+    CGRect potentialNewFrame = CGRectMake(newPoint.x, newPoint.y, CGRectGetWidth(toolbar.frame), CGRectGetHeight(toolbar.frame));
+    
+    if (CGRectContainsRect(self.view.bounds, potentialNewFrame)) {
+        toolbar.frame = potentialNewFrame;
+    }
+}
+
+- (void) floatingToolbar:(AwesomeFloatingToolbar *)toolbar didPinchWithScale:(CGFloat)scale {
+    
+    CGRect potentialNewFrame = CGRectMake(toolbar.frame.origin.x, toolbar.frame.origin.y, CGRectGetWidth(toolbar.frame)*scale, CGRectGetHeight(toolbar.frame)*scale);
+    
+    if (CGRectContainsRect(self.view.bounds, potentialNewFrame)) {
+        toolbar.frame = potentialNewFrame;
+    }
+}
+
 
 #pragma mark - History Auto Clear
 
@@ -211,6 +233,8 @@
     [self.awesomeToolbar setEnabled:[self.webView isLoading] forButtonWithTitle:kWebBrowserStopString];
     [self.awesomeToolbar setEnabled:![self.webView isLoading] && self.webView.URL forButtonWithTitle:kWebBrowserRefreshString];
 }
+
+
 
 
 @end

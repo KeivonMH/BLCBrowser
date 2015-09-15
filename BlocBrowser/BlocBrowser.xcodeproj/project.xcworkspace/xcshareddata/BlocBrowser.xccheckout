@@ -7,14 +7,14 @@
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>236F0CA7-FCA0-4E38-A4B0-C3EC6716D60F</string>
 	<key>IDESourceControlProjectName</key>
-	<string>project</string>
+	<string>BlocBrowser</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>3872C4FC0568F8C48D86424C6982E50BF3173C6C</key>
 		<string>github.com:KeivonMH/BLCBrowser.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>BlocBrowser/BlocBrowser.xcodeproj/project.xcworkspace</string>
+	<string>BlocBrowser/BlocBrowser.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>3872C4FC0568F8C48D86424C6982E50BF3173C6C</key>
